@@ -35,6 +35,7 @@ jobs:
           inlineScript: |
               $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `    
               # List resources in the specified resource group `
+              write-host "The resource group entered is $resourceGroupName" `
               $resources = Get-AzResource -ResourceGroupName $resourceGroupName `
               $resources | Format-Table `    
               # Log resource list to summary `
