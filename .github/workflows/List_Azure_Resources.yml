@@ -17,14 +17,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Azure CLI
-        uses: azure/setup-cli@v1
+        uses: actions/checkout@v3
 
       - name: Login to Azure
         id: login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -32,14 +29,17 @@ jobs:
           allow-no-subscriptions: true
 
       - name: List Azure Resources
-        run: |
-          az login --identity
-          az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          az resource list --resource-group ${{ github.event.inputs.resource_group_name }} --output table
-
-      - name: Log resource list to summary
-        run: |
-          resourceGroup=${{ github.event.inputs.resource_group_name }}
-          az login --identity
-          az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          az resource list --resource-group $resourceGroup --output table >> $env:GITHUB_STEP_SUMMARY
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+              $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `
+    
+              # Authenticate to Azure `
+              Connect-AzAccount -Identity `
+    
+              # List resources in the specified resource group `
+              $resources = Get-AzResource -ResourceGroupName $resourceGroupName `
+              $resources | Format-Table `
+    
+              # Log resource list to summary `
+              $resources | Format-Table | Out-String | ForEach-Object { Write-Output "## $_" } >> $env:GITHUB_STEP_SUMMARY
