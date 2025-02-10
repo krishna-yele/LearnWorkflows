@@ -33,14 +33,9 @@ jobs:
         with:
           azPSVersion: "latest"
           inlineScript: |
-              $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `
-    
-              # Authenticate to Azure `
-              Connect-AzAccount -Identity `
-    
+              $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `    
               # List resources in the specified resource group `
               $resources = Get-AzResource -ResourceGroupName $resourceGroupName `
-              $resources | Format-Table `
-    
+              $resources | Format-Table `    
               # Log resource list to summary `
               $resources | Format-Table | Out-String | ForEach-Object { Write-Output "## $_" } >> $env:GITHUB_STEP_SUMMARY
