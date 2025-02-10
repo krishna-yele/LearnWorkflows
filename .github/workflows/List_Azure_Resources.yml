@@ -33,7 +33,7 @@ jobs:
         with:
           azPSVersion: "latest"
           inlineScript: |
-              $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `    
+              $resourceGroupName = "dlpm-kry025-rg" `    
               echo $resourceGroupName `
               # List resources in the specified resource group `
               $resources = Get-AzResource -ResourceGroupName $resourceGroupName `
