@@ -31,6 +31,7 @@ jobs:
       - name: List Azure Resources
         uses: azure/powershell@v1
         with:
+          azPSVersion: "latest"
           inlineScript: |
               $resourceGroupName = "${{ github.event.inputs.resource_group_name }}" `
     
