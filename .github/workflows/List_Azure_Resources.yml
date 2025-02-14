@@ -34,3 +34,10 @@ jobs:
           azPSVersion: "latest"
           inlineScript: |
               PSscripts/list_all_resources.ps1
+
+      - name: Get lookup table
+        uses: azure/powershell@v1
+        with:
+          azPSVersion: "latest"
+          inlineScript: |
+              PSscripts/Get_LookupTables.ps1
