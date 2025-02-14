@@ -1,3 +1,6 @@
+$pathOfFile = Get-Location
+write-host "Printing path of file"
+write-host $pathOfFile
 function Get-LookupTable {
     param (
         [string]$Table,
