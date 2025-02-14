@@ -1,12 +1,13 @@
 $pathOfFile = Get-Location
 write-host "Printing path of file"
 write-host $pathOfFile
+#/home/runner/work/LearnWorkflows/LearnWorkflows/PSscripts/lookups/
 function Get-LookupTable {
     param (
         [string]$Table,
         [string]$Query
     )
-    $csvFile = Import-csv -Path "lookups\$Table.csv"
+    $csvFile = Import-csv -Path "PSscripts/lookups/$Table.csv"
     #Write-Host $csvFile 
 
     if (!$csvFile) {
