@@ -13,3 +13,4 @@ function Get-LookupTable {
     return $csvFile
 }
 
+Get-LookupTable -Table DNACONFIG 
