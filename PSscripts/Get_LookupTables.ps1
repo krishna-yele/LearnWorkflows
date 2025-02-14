@@ -17,4 +17,4 @@ function Get-LookupTable {
     return $csvFile
 }
 
-(Get-LookupTable -Table DNACONFIG ) | Where-Object{$_.Resource -eq "Storage Account v2" -and $_.SNOWRoleName -eq "monitoring contributor"
+(Get-LookupTable -Table DNACONFIG ) | Where-Object{$_.Resource -eq "Storage Account v2" -and $_.SNOWRoleName -eq "monitoring contributor"}
